@@ -1,14 +1,5 @@
 
 
-3班
-https://github.com/EnshuGroup13-3
-33E13014    西村友洋    東野研(5F)    t-nisimr@ist.osaka-u.ac.jp    
-33E13005    北出雄馬    村田研        y-kitade@ist.osaka-u.ac.jp    
-33E13007    河野史織    渡辺研        kouno.shiori@ist.osaka-u.ac.jp    https://github.com/shiorry
-
-最終課題へ
-
-
 rake rubocop
 コーディングフォーマットのチェック。要するにきれいなコードかどうか。
 
