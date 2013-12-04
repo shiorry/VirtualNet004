@@ -1,0 +1,58 @@
+
+
+3班
+https://github.com/EnshuGroup13-3
+33E13014    西村友洋    東野研(5F)    t-nisimr@ist.osaka-u.ac.jp    
+33E13005    北出雄馬    村田研        y-kitade@ist.osaka-u.ac.jp    
+33E13007    河野史織    渡辺研        kouno.shiori@ist.osaka-u.ac.jp    https://github.com/shiorry
+
+最終課題へ
+
+
+rake rubocop
+コーディングフォーマットのチェック。要するにきれいなコードかどうか。
+
+
+■2013/12/04
+仮想ネットワークを作る話
+	データセンタネットワークの一部
+	仮想化API (NWミドルウェア)を実装。実サービスと繋げるとなおよし
+	「SDN 仮想ネットワーク」でググるとか
+
+スライス機能付きスイッチ「Wakame」
+trema apps の sliceable_switch
+	https://github.com/trema/apps
+	https://github.com/trema/apps/tree/master/sliceable_switch
+
+
+API(Application Programming Interface) と言うからには、
+アプリケーション層からネットワーク層を操作するための仲介プログラムのこと？？
+例えば
+１つのネットワークを、ユーザによって別のネットワークとして扱うとか
+ネットワークの資源を要求に応じて(on-demandに)提供するとか
+
+
+
+■2013/12/11
+
+
+
+■2013/12/18
+
+
+
+■2014/01/08
+
+
+■2014/01/15
+
+
+
+
+■2014/01/22
+成果発表
+BIGLOBEの方が来るとか何とか。実際のデータセンタについて聞けるか
+
+
+
+
