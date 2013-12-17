@@ -141,6 +141,9 @@ class TopologyController < Controller
         # 経路を元にフローテーブルを一挙更新
           target_dpid = dest_dpid
         while true
+          if target_dpid == source_dpid
+            break
+          end
           puts "switch[" + dijkstra_walk_dpid[target_dpid].to_s + "] (port " + dijkstra_walk_port[target_dpid].to_s + ") -> switch[" + target_dpid.to_s + "]"
           send_flow_mod_add(
             dijkstra_walk_dpid[target_dpid],
@@ -148,9 +151,6 @@ class TopologyController < Controller
             :actions => SendOutPort.new(dijkstra_walk_port[target_dpid].to_i)
             )
           target_dpid = dijkstra_walk_dpid[target_dpid]
-          if target_dpid == source_dpid
-            break
-          end
         end
         send_flow_mod_add(
           dest_dpid,
