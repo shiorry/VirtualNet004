@@ -13,9 +13,6 @@ class Topology
   include Observable
   extend Forwardable
 
-  attr_reader :ports
-  attr_reader :links
-  attr_reader :hosts
   def_delegator :@ports, :each_pair, :each_switch
   def_delegator :@links, :each, :each_link
   def_delegator :@hosts, :each, :each_host
@@ -24,7 +21,12 @@ class Topology
     @ports = Hash.new { [].freeze }
     @links = []
     @hosts = []
+    @slice = Array.new()
     add_observer view
+    # テストスライス
+    @slice[1] = []
+    @slice[1].push("192.168.0.6")
+    @slice[1].push("192.168.0.22")
   end
 
   def delete_switch(dpid)
@@ -74,19 +76,48 @@ class Topology
     end
   end
   
-  # IPアドレスからホストを取得
-  def get_host(address)
+  # dpidからMACアドレスを取得
+  def get_mac(dpid)
     result = nil
-    @hosts.each do | each |
-      if each.ipaddr2.to_s == address
-        result = each
+    @links.each do | each |
+      if each.dpid1 == dpid
+        result = each.mac1
         break
       end
     end
     return result
   end
   
-  
+  # IPアドレスからホストを取得
+  def get_host(address)
+    result = nil
+    @hosts.each do | each |
+      if each.ipaddr2.to_s == address.to_s
+        result = each
+        break
+      end
+    end
+    return result
+  end
+
+  # 2つのホストが同じスライスに属していたらtrueを返す
+  # num_slice : 調査対象のスライス番号。負の数を指定すれば全スライスを探索
+  def isInSameSlice?(host1, host2, num_slice)
+    result = false
+    if num_slice>=0
+      @slice.each do | each |
+        if each.include?(host1.ipaddr2.to_s) && each.include?(host2.ipaddr2.to_s)
+          result = true
+        end
+      end
+    else
+      if @slice[num_slice].include?(host1.ipaddr2.to_s) && @slice[num_slice].include?(host2.ipaddr2.to_s)
+        result = true
+      end
+    end
+    return result
+  end
+
   private
 
   def delete_link_by(dpid, port)
@@ -105,4 +136,3 @@ end
 ### coding: utf-8-unix
 ### indent-tabs-mode: nil
 ### End:
-
