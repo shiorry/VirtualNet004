@@ -184,10 +184,10 @@ class TopologyController < Controller
           Trema::SendOutPort.new(dest_host.port1.to_i)
           ]
         )
-	  	send_packet_out(
-	  		dpid, 
-	  		:packet_in => message, 
-	  		:actions => Trema::SendOutPort.new(dest_host.port1.to_i) )
+      send_packet_out(
+        dest_dpid, 
+        :packet_in => message, 
+        :actions => Trema::SendOutPort.new(dest_host.port1.to_i) )
     end
   end
 end
