@@ -1,3 +1,4 @@
+# coding: utf-8
 
 # 練習
 str = "Hello, world."
