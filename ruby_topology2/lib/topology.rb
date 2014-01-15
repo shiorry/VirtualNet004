@@ -108,7 +108,7 @@ class Topology
   def isInSameSlice?(host1, host2, num_slice)
     result = false
     if num_slice<0
-      @slice.each do | eachs |
+      @slice.each do | each |
         if each.nil?
           next
         elsif each.include?(host1.ipaddr2.to_s) && each.include?(host2.ipaddr2.to_s)
