@@ -165,27 +165,27 @@ class TopologyController < Controller
         puts "switch[" + dijkstra_walk_dpid[target_dpid].to_s + "] (port " + dijkstra_walk_port[target_dpid].to_s + ") -> switch[" + target_dpid.to_s + "]"
         send_flow_mod_add(
           dijkstra_walk_dpid[target_dpid],
-          # :match => ExactMatch.from(message),
-          :match => Match.new( :nw_dst => dest_ip.to_s, :nw_src => source_ip.to_s ),
+          :match => ExactMatch.from(message),
+          # :match => Match.new( :nw_dst => dest_ip.to_s, :nw_src => source_ip.to_s ),
           # :actions => SendOutPort.new(dijkstra_walk_port[target_dpid].to_i)
-          :actions => [
+          :actions =># [
             # Trema::SetIpDstAddr.new(dest_ip.to_s),
             # Trema::SetEthDstAddr.new(@topology.get_mac(target_dpid)),
             Trema::SendOutPort.new(dijkstra_walk_port[target_dpid].to_i)
-            ]
+            #]
           )
         target_dpid = dijkstra_walk_dpid[target_dpid]
       end
       send_flow_mod_add(
         dest_dpid,
-        # :match => ExactMatch.from(message),
-        :match => Match.new( :nw_dst => dest_ip.to_s, :nw_src => source_ip.to_s ),
+        :match => ExactMatch.from(message),
+        # :match => Match.new( :nw_dst => dest_ip.to_s, :nw_src => source_ip.to_s ),
         # :actions => SendOutPort.new(dest_host.port1.to_i)
-        :actions => [
+        :actions => #[
           # Trema::SetIpDstAddr.new(dest_ip.to_s),
           # Trema::SetEthDstAddr.new(dest_host.mac1),
           Trema::SendOutPort.new(dest_host.port1.to_i)
-          ]
+          #]
         )
 	  	send_packet_out(
 	  		dest_dpid, 
