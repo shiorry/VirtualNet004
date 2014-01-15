@@ -181,11 +181,11 @@ class TopologyController < Controller
         :match => ExactMatch.from(message),
         # :match => Match.new( :nw_dst => dest_ip.to_s, :nw_src => source_ip.to_s ),
         # :actions => SendOutPort.new(dest_host.port1.to_i)
-        :actions => #[
+        :actions => {
           # Trema::SetIpDstAddr.new(dest_ip.to_s),
           # Trema::SetEthDstAddr.new(dest_host.mac1),
           Trema::SendOutPort.new(dest_host.port1.to_i)
-          #]
+          ]
         )
 	  	send_packet_out(
 	  		dest_dpid, 
