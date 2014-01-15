@@ -1,4 +1,8 @@
 # coding: utf-8
+# 練習
+str = "Hello, world."
+puts("文字列：#{str}\n")
+puts("部分文字列[3..7]：#{str[3..7]}\n")
 
 # スイッチ
 switches = Array.new
