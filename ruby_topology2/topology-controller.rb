@@ -93,7 +93,7 @@ class TopologyController < Controller
     end
     dest_host = @topology.get_host(dest_ip)
     source_host = @topology.get_host(source_ip)
-    if ! dest_host || ! source_host
+    if dest_host.nil? || source_host.nil?
       return
     end
     # 送受信ノードがホストの場合
@@ -118,6 +118,9 @@ class TopologyController < Controller
     #puts "dijkstra : "+source_dpid
     puts "@" + dpid.to_s +  ", dijkstra : ["+source_host.to_s + "] -> [" + dest_host.to_s + "]"
     while true
+      if dest_dpid==source_dpid
+        break
+      end
       @topology.each_link do | each |
         if each.dpid1 != target_dpid
           next
@@ -184,10 +187,10 @@ class TopologyController < Controller
           Trema::SendOutPort.new(dest_host.port1.to_i)
           ]
         )
-      send_packet_out(
-        dest_dpid, 
-        :packet_in => message, 
-        :actions => Trema::SendOutPort.new(dest_host.port1.to_i) )
+	  	send_packet_out(
+	  		dest_dpid, 
+	  		:packet_in => message, 
+	  		:actions => Trema::SendOutPort.new(dest_host.port1.to_i) )
     end
   end
 end

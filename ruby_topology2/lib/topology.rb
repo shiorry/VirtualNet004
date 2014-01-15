@@ -25,8 +25,11 @@ class Topology
     add_observer view
     # テストスライス
     @slice[1] = []
-    @slice[1].push("192.168.0.6")
-    @slice[1].push("192.168.0.22")
+    @slice[1].push("192.168.0.1")
+    @slice[1].push("192.168.0.2")
+    @slice[2] = []
+    @slice[2].push("192.168.0.3")
+    @slice[2].push("192.168.0.4")
   end
 
   def delete_switch(dpid)
@@ -104,9 +107,11 @@ class Topology
   # num_slice : 調査対象のスライス番号。負の数を指定すれば全スライスを探索
   def isInSameSlice?(host1, host2, num_slice)
     result = false
-    if num_slice>=0
-      @slice.each do | each |
-        if each.include?(host1.ipaddr2.to_s) && each.include?(host2.ipaddr2.to_s)
+    if num_slice<0
+      @slice.each do | eachs |
+        if each.nil?
+          next
+        elsif each.include?(host1.ipaddr2.to_s) && each.include?(host2.ipaddr2.to_s)
           result = true
         end
       end
